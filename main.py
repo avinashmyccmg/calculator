@@ -5,7 +5,7 @@ class Calculator:
 
     @staticmethod
     def add(x: float, y: float) -> float:
-        return x + y 
+        return x + y
 
     @staticmethod
     def subtract(x: float, y: float) -> float:
@@ -23,11 +23,11 @@ class Calculator:
 
 
 
-calc = Calculator(0,0)
-
-print(Calculator.add(5, 2))
-print(Calculator.subtract(5, 2))
-print(Calculator.multiply(5, 1))
-print(Calculator.divide(0, 2))
+# calc = Calculator(0,0)
+#
+# print(Calculator.add(5, 2))
+# print(Calculator.subtract(5, 2))
+# print(Calculator.multiply(5, 1))
+# print(Calculator.divide(0, 2))
 
 
