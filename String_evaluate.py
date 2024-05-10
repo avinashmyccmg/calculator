@@ -1,3 +1,6 @@
+import mysql.connector
+
+
 def calculation(expression):
     def apply_operator(operators, values):
         operator = operators.pop()
@@ -38,8 +41,37 @@ def calculation(expression):
     return values[0]
 
 
-expression = " 3 * 4 - 2"
-result = calculation(expression)
-print(result)
+def update_data(expression,result):
 
+    try:
+        connect_db = mysql.connector.connect(
+            user='root', password='root',
+            host='localhost',
+            database='testDB')
+
+        cursor = connect_db.cursor()
+
+        table_query = '''
+            create table if not exists testDB.calculator
+            ( ID int not null AUTO_INCREMENT,
+            expression varchar(50) default null,
+            result int default null,
+            PRIMARY KEY(ID)
+            );
+            '''
+        cursor.execute(table_query)
+        insert_query = """ insert into calculator (expression, result) VALUES (%s, %s); """
+        cursor.execute(insert_query,(expression,result))
+
+    except Exception as e:
+        print(str(e))
+
+    finally:
+        connect_db.commit()
+        connect_db.close()
+
+
+expression = " 3 * 4 - 2"
+calc_result = calculation(expression)
+update_data(expression,calc_result)
 
